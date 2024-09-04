@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from 'next/script'
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -35,7 +36,15 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-3JER8QRD5Z" />
-        <script src="./gtag.js" />
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-3JER8QRD5Z');
+              console.log("This bitch is working properly now")
+          `}
+        </Script>
       </head>
       <body
         className={cn(
